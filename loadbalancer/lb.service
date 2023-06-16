@@ -1,0 +1,12 @@
+[Unit]
+Description=My Python LB Service
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory= /home/ubuntu/loadbalancer
+ExecStart=/usr/bin/python3 loadbalancer.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
