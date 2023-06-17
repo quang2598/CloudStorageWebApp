@@ -8,7 +8,7 @@ from itertools import cycle
 # $ ~  while true ; do nc -l 8888 < server1.html; done
 # $ ~  while true ; do nc -l 9999 < server2.html; done
 #SERVER_POOL = [('172.31.18.32', 80), ('172.31.12.185', 80)]
-SERVER_POOL = [('3.21.46.30', 80), ('18.117.180.128', 80)]
+SERVER_POOL = [('172.31.18.32', 80), ('54.65.5.113', 80), ('34.208.136.74', 80)]
 
 # dumb python socket echo server, long tcp connection
 # $ ~  while  python server.py
@@ -17,6 +17,27 @@ SERVER_POOL = [('3.21.46.30', 80), ('18.117.180.128', 80)]
 ITER = cycle(SERVER_POOL)
 def round_robin(iter):
     # round_robin([A, B, C, D]) --> A B C D A B C D A B C D ...
+    # select a server that forwards packets to
+    server_ip, server_port = next(iter)
+
+    for i in range(len(SERVER_POOL)):
+        try:
+            # init a health check socket
+            hc_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Set timeout for connection
+            hc_socket.settimeout(2)
+            hc_socket.connect((server_ip, server_port))
+            # Working server found
+            print(f'Server {server_ip} is working')
+            break
+        except socket.timeout:
+            # close timout socket
+            hc_socket.close()
+            # Check next server
+            server_ip, server_port = next(iter)
+    # close socket and return server
+    hc_socket.close()
+    
     return next(iter)
 
 

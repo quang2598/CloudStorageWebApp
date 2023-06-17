@@ -18,7 +18,7 @@
           <h3>2. List of All files in the bucket:</h3>
           <p>Download it by clicking on the links.</p>
           <ul>
-            {% for item in contents[1] %}
+            {% for item in contents %}
               <li>
                 <a href="/download/{{ item.Key }}"> {{ item.Key }} </a>
               </li>

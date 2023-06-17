@@ -14,7 +14,7 @@ def start():
 def home():
     contents = list_all_files(BUCKET)
     server_name = "Server 2"
-    return render_template('s3_storage_dashboard.html', contents= [contents, server_name])
+    return render_template('s3_storage_dashboard.html', contents= contents)
 
 @app.route("/upload", methods=['POST'])
 def upload_files():
