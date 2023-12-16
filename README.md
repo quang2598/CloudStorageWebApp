@@ -9,15 +9,14 @@ Setup Web Server:
 1) Create Ubuntu EC2 instance
 2) Clone this repo from Git
 3) Keep the files in config and app folders (loadbalancer is not needed)
-4) Run "bash configvm.sh" to update system and download dependences
+4) Update system and download dependences `bash configvm.sh`
 5) Copy lb.service and place it under /etc/systemd/system/
-6) Run "bash runapp.sh" and your app is up and running
+6) Run the application `bash runapp.sh`
 
 Setup Load Balancer:
 1) Create Ubuntu EC2 instance
 2) Clone this repo from Git
 3) Keep the files in config and loadbalancer folders (app is not needed)
-4) Run "bash configvm.sh" to update system and download dependences
+4) Update system and download dependences `bash configvm.sh`
 5) Copy dropboxapp.service and place it under /etc/systemd/system/
-6) Run "bash runlb.sh" and your load balancer is up and running
-
+6) Run the application `bash runlb.sh`
